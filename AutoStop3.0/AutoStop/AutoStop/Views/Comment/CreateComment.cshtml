@@ -1,0 +1,39 @@
+﻿@model AutoStop.Models.Comments
+
+@{
+    ViewData["Title"] = "CreateComments";
+    Layout = null;
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateComment">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <textarea asp-for="Comment" class="form-control" rows = "3" ></textarea>
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountsId" class="control-label"></label>
+                <input asp-for="AccountsId" class ="form-control" value="@ViewBag.AccountsId"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="TravelsId" class="control-label"></label>
+                <input asp-for="TravelsId" class ="form-control" value="@ViewBag.TravelsId"></input>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

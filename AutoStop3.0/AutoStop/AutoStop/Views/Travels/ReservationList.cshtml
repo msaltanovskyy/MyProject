@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AutoStop.Models.BusyPlaces>
+
+@{
+    ViewData["Title"] = "ReservationList";
+}
+
+<h1>Мои места</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Traverl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusyPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accounts)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Traverl.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BusyPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accounts.Id)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

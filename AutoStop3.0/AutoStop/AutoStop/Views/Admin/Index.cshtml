@@ -1,0 +1,162 @@
+﻿@{
+    
+}
+@model AutoStop.ViewModels.AdminViewModel
+
+<div>
+    <div class = "container">
+        <h1>Категории</h1>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Название</th>
+              <th scope="col">Описание</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          @foreach(var c in Model.CategoriesCars){
+          <tbody>
+            <tr>
+              <td>@c.Id</td>
+              <td>@c.Name</td>
+              <td>@c.Discription</td>
+              <td><a onclick="showInPopup('@Url.Action("CategoryEdit","Admin",new {id=c.Id},Context.Request.Scheme)','Редактировать')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a></td>
+              <td><form asp-action="CategoryDelete" asp-route-id="@c.Id" onsubmit='return jQueryAjaxDelete(this)' class="d-inline">
+                <input type="submit" value="Удалить" class="btn btn-danger" />
+              </form></td>
+            </tr>
+          </tbody>
+          }
+        </table>
+        <a onclick="showInPopup('@Url.Action("AddCategory","Admin",null,Context.Request.Scheme)','')" class="btn btn-success"><i class="bi bi-plus-lg"></i> Добавить категорию</a>
+                      
+    </div>
+
+    <div class = "container">
+    <h1>Роли</h1>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Название</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          @foreach(var r in Model.Roles){
+          <tbody>
+            <tr>
+              <td>@r.Id</td>
+              <td>@r.Name</td>
+              <td><form asp-action="RoleDelete" asp-route-id="@r.Id" onsubmit='return jQueryAjaxDelete(this)' class="d-inline">
+                <input type="submit" value="Удалить" class="btn btn-danger" />
+              </form></td>
+            </tr>
+          </tbody>
+          }
+        </table>
+        <a onclick="showInPopup('@Url.Action("AddRole","Admin",null,Context.Request.Scheme)','')" class="btn btn-success"><i class="bi bi-plus-lg"></i> Добавить роль</a>
+    </div>
+    <div class = "container">
+        <h1>Пользователи</h1>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+               <th scope = "col">Id</th>
+              <th scope="col">Почта</th>
+              <th scope="col">Имя</th>
+              <th scopr = "col">Номер телефона</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          @foreach(var u in Model.Users){
+          <tbody>
+            <tr>
+              <td>@u.Id</td>
+              <td>@u.Email</td>
+              <td>@u.UserName</td>
+              <td>@u.PhoneNumber</td>
+              <td><a role = "button" class = "btn btn-danger">Удалить</a></td>
+              <td><a role = "button" class = "btn btn-primary" asp-action="SelectRole" asp-route-userid="@u.Id">Права доступа</a></td>
+            </tr>
+          </tbody>
+          }
+        </table>
+    </div>
+
+    <div class = "container">
+        <h1>Маршруты</h1>
+        <h2>Точка отправления</h2>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+               <th scope = "col">Id</th>
+              <th scope="col">Название</th>
+              <th></th>
+            </tr>
+          </thead>
+          @foreach(var p in Model.PointSends){
+          <tbody>
+            <tr>
+              <td>@p.Id</td>
+              <td>@p.PointName</td>
+              <td><form asp-action="DeletePointSend" asp-route-id="@p.Id" onsubmit='return jQueryAjaxDelete(this)' class="d-inline">
+                <input type="submit" value="Удалить" class="btn btn-danger" />
+              </form></td>
+            </tr>
+          </tbody>
+          }
+        </table>
+        <a onclick="showInPopup('@Url.Action("AddPointSend","Admin",null,Context.Request.Scheme)','')" class="btn btn-success"><i class="bi bi-plus-lg"></i> Добавить точку отправления</a>
+        <h2>Точка прибытия</h2>
+            <table class="table">
+          <thead class="thead-dark">
+            <tr>
+               <th scope = "col">Id</th>
+              <th scope="col">Название</th>
+              <th></th>
+            </tr>
+          </thead>
+          @foreach(var p in Model.PointArrives){
+          <tbody>
+            <tr>
+              <td>@p.Id</td>
+              <td>@p.PointName</td>
+              <td><form asp-action="DeletePointSend" asp-route-id="@p.Id" onsubmit='return jQueryAjaxDelete(this)' class="d-inline">
+                <input type="submit" value="Удалить" class="btn btn-danger" />
+              </form></td>
+            </tr>
+          </tbody>
+          }
+        </table>
+        <a onclick="showInPopup('@Url.Action("AddPointArrive","Admin",null,Context.Request.Scheme)','')" class="btn btn-success"><i class="bi bi-plus-lg"></i> Добавить точку прибытия</a>
+    </div>
+    <div class = "container">
+        <h1>Черный список</h1>
+           <table class="table">
+          <thead class="thead-dark">
+            <tr>
+               <th scope = "col">Id</th>
+              <th scope="col">Аккаунт</th>
+              <th scope="col">Причина</th>
+              <th></th>
+            </tr>
+          </thead>
+          @foreach(var b in Model.BlackList){
+          <tbody>
+            <tr>
+              <td>@b.Id</td>
+              <td>@b.Accounts.UserName</td>
+              <td>@b.Reason</td>
+              <td><a role = "button" class = "btn btn-danger">Delete</a></td>
+            </tr>
+          </tbody>
+          }
+        </table>
+        <a onclick="showInPopup('@Url.Action("AddBlackList","Admin",null,Context.Request.Scheme)','Черный список')" class="btn btn-success">Добавить в черный список</a>
+    </div>
+
+</div>

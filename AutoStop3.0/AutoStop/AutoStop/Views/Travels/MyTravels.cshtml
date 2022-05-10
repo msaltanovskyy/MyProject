@@ -1,0 +1,100 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<AutoStop.Models.Travels>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Мои поездки</h1>
+
+<p>
+    <a class ="btn btn-success" asp-action="Create">Добавить новый</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeCreate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeSend)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeArrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailableSeats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PointSend)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PointArrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Creater)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeCreate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeSend)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeArrive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailableSeats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.NumberCar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PointSend.PointName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PointArrive.PointName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creater.Id)
+            </td>
+            <td>
+                <div class = "btn-group-vertical">
+                    <a class = "btn btn-primary" asp-action="Edit" asp-route-id="@item.Number">Редактировать</a> 
+                    <a class = "btn btn-success" role = "button" asp-action="Details" asp-route-id="@item.Number">Подробнее</a>
+                   <form asp-action="MyTravelsDelete" asp-route-id="@item.Number" onsubmit='return jQueryAjaxDelete(this)'>
+                        <input type="submit" value="Удалить" class="btn btn-danger" />
+                    </form>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

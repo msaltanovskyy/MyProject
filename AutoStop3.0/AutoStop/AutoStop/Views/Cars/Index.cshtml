@@ -1,0 +1,59 @@
+﻿@model IEnumerable<AutoStop.Models.Cars>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Автомобили</h1>
+
+<p>
+    <a asp-action="Create" role = "button" class = "btn btn-primary">Добавить новый</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberCar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chair)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Drivers)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberCar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chair)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drivers.Id)
+            </td>
+            <td>
+                <a class = "btn btn-outline-primary" role = "button" asp-action="Details" asp-route-id="@item.id">Подробнее</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
