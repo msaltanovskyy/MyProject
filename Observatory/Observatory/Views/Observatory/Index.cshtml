@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Observatory.Models.Area>
+
+<div class = "row">
+        @foreach(var a in Model){
+            <ul class="nav nav-pills mb-3" id="Area" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link active"
+                  id="viewArea"
+                  role = "button"
+                   asp-route-id = "@a.Id"  
+                >@a.Name</a>
+              </li>
+            </ul>
+        }
+        <a role = "button" class = "btn btn-primary" id = "buttonArea">Add Area</a>
+</div>
+
+<div id = "AddArea"></div>
+<div id = "ViewArea"></div>
+<script>
+    $(document).ready(function(){
+        $("#buttonArea").click(function(){
+                $("#AddArea").load('@Url.Action("AreaCreate","Observatory")');
+        });      
+    });
+
+    $(document).ready(function(){
+        $("#viewArea").click(function(){
+            $("#ViewArea").load('@Url.Action("ViewArea","Observatory")');
+        });
+    });
+</script>
